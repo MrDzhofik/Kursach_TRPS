@@ -1,10 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-	<meta charset="UTF-8">
-	<title>Title</title>
-	{{map.header.render|safe}}
+{% include 'base.html' %}
+{% block content%}
+{{map.header.render|safe}}
 </head>
 
 <body>
@@ -18,4 +14,4 @@
 	{% endif %}
 </body>
 
-</html>
+{% endblock %}

@@ -1,5 +1,6 @@
 from django import forms
+from .models import Attraction
 
 class SimpleForm(forms.Form):
-    start_point = forms.CharField(label="Start Point", max_length=100)
-    end_point = forms.CharField(label="End Point", max_length=100)
+    start_point = forms.ModelChoiceField(queryset=Attraction.objects.all(), label="Start Point", required=True)
+    end_point = forms.ModelChoiceField(queryset=Attraction.objects.all(), label="End Point", required=True)

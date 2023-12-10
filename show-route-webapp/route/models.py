@@ -8,3 +8,7 @@ class Attraction(models.Model):
     city = models.CharField(max_length=50)
     address = models.CharField(max_length=50)
     location = models.PointField()
+
+    def __str__(self):
+        s = self.name + ', ' + self.country + ', ' + self.city
+        return s
