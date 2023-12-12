@@ -43,7 +43,7 @@ def showroute(request):
     data = request.POST
     figure = folium.Figure()
     points = []
-    for key, value in data.items():
+    for key in data.keys():
         if key != 'csrfmiddlewaretoken':
             i = data.get(key)
             geo = Attraction.objects.get(id=i)
@@ -52,7 +52,6 @@ def showroute(request):
             lat = long.y
             long = long.x
             points.append([lat, long])
-    # print(points)
 
     route=get_route(points)
     m = folium.Map(location=[(route['start_point'][0]),
