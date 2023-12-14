@@ -13,7 +13,7 @@ function addField() {
     clonedField.querySelector('label').textContent = 'Промежуточная точка';
 
     // Удаляем сообщения об ошибке
-    var error_message = document.getElementsByClassName('error_message');
+    var error_message = document.getElementsByClassName('alert');
     if (error_message.length > 0) {
         console.log(error_message.length)
         for (var i = 0; error_message.length != 0;) {
@@ -35,8 +35,8 @@ function removeField() {
         inputElement[0].remove();
     } else {
         var errorMessage = document.createElement('p');
-        errorMessage.innerText = 'Элемент не найден';
-        errorMessage.classList.add('error_message');
+        errorMessage.innerText = 'Нет промежуточных точек';
+        errorMessage.classList.add('alert');
         document.body.appendChild(errorMessage);
     }
 }

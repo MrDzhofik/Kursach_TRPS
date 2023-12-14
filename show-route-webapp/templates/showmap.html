@@ -1,10 +1,23 @@
 {% include 'base.html' %}
 {% block content%}
 <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
-{% load bootstrap5 %}
-{% bootstrap_css %}
-{% bootstrap_javascript %}
 {% load static %}
+<style>
+  .alert {
+    color: red
+  }
+
+  .form-control {
+    margin: 10px 0;
+  }
+
+  .form-control select {
+    background-color: white;
+    width: 250px;
+    height: 25px;
+    border-radius: 3px;
+  }
+</style>
 </head>
 
 <body>
@@ -12,7 +25,19 @@
     <form class="form-group" action="{% url 'showroute' %}" method="post" id="inputContainer">
       {% csrf_token %}
       <div id="input">
-        {{ form.as_p }}
+        {% for field in form %}
+        <div class="form-control">
+          {{field.label_tag}}
+          <div>{{field}}</div>
+          {% if field.errors%}
+          {% for error in field.errors %}
+          <div class="alert alert-danger">
+            {{error}}
+          </div>
+          {%endfor %}
+          {% endif %}
+        </div>
+        {% endfor %}
         <input type="button" class="btn btn-warning" value="Добавить промежуточную точку" id="add-field"
           onclick="addField()">
         <input type="button" class="btn btn-danger" value="Удалить промежуточную точку" id="delete-field"
@@ -24,7 +49,7 @@
   </div>
 
   <div id="map"></div>
-  <script src="{% static 'js/showmap.js' %}"></script>
+  <script src="{% static 'js/showmap_2.js' %}"></script>
 </body>
 
 {% endblock %}

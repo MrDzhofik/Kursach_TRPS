@@ -1,10 +1,13 @@
 {% include 'base.html' %}
 {% block content%}
 {{map.header.render|safe}}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/showroute.css' %}">
+</link>
 </head>
 
 <body>
-	<button class="btn btn-warning"><a href="{% url 'showmap' %}">Назад</a></button>
+	<a class="black" href="{% url 'showmap' %}"><button class="btn btn-warning">Назад</button></a>
 	{% if map %}
 
 	{{map | safe}}

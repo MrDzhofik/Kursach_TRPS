@@ -7,7 +7,6 @@ def get_route(points):
         long, lat = map(float, i)
         url += f"{lat},{long};"
     url = url[:-1]
-    print(url)
     r = requests.get(url) 
     if r.status_code != 200:
         return {}
