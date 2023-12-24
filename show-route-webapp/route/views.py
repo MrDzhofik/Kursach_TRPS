@@ -19,7 +19,6 @@ def showroute(request):
 def min(row, indexes):
     min_dist = float("inf")
     index = 0
-    print(row)
     for j in range(len(row)):
         if row[j] < min_dist and row[j] != 0 and j not in indexes:
             index = j
@@ -76,7 +75,6 @@ def create_map(route):
     for key in range(len(coords)):
         l = coords[key].split()
         if l:
-            print(l)
             coord = tuple(map(float, (l[0], l[1])))
             folium.Marker(location=coord,icon=folium.Icon(icon='pause', color='blue')).add_to(m)
     folium.Marker(location=route['start_point'],icon=folium.Icon(icon='play', color='green')).add_to(m)
@@ -89,7 +87,6 @@ def create_map(route):
 def nearest_neighbour(points):
     indexes = [0]
     matrix = calc_distance(points)
-    print(matrix)
     new_points = []
     index = 0
     for i in range(1, len(points) - 1):
@@ -97,7 +94,6 @@ def nearest_neighbour(points):
         indexes.append(ok)
         index = ok
     indexes.append(len(points) - 1)
-    print("indexes: ", indexes)
     for i in range(len(indexes)):
         new_points.append(points[indexes[i]])
     
