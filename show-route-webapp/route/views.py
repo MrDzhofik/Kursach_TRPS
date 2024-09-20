@@ -15,8 +15,8 @@ def showroute(request):
     context={'map':figure._repr_html_()}
     return render(request,'showroute.html',context)
 
-# Поиск минимального элемента в массиве
-def min(row, indexes):
+# Поиск минимального элемента в массиве (индекс)
+def min_dist(row, indexes):
     min_dist = float("inf")
     index = 0
     for j in range(len(row)):
@@ -26,22 +26,20 @@ def min(row, indexes):
     
     return index
 
-# Расчет расстояния геогрфических точек
+# Расчет расстояния геогрaфических точек
 def calc_distance(points):
     distance = []
     dist = []
     for i in range(len(points)):
         for j in range(len(points)):
             if j == i:
-                dist.append(0)
+                dist.append(100000000)
             else:
                 dist.append(round(geodesic(points[i], points[j]).km, 2))
         distance.append(dist)
         dist = []
 
     return distance
-
-
 
 def makeroute(data):
     points = []
@@ -89,11 +87,10 @@ def nearest_neighbour(points):
     matrix = calc_distance(points)
     new_points = []
     index = 0
-    for i in range(1, len(points) - 1):
-        ok = min(matrix[index], indexes)
+    for i in range(len(points) - 1):
+        ok = min_dist(matrix[index], indexes)
         indexes.append(ok)
         index = ok
-    indexes.append(len(points) - 1)
     for i in range(len(indexes)):
         new_points.append(points[indexes[i]])
     
