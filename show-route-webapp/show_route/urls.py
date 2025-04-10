@@ -16,12 +16,10 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path
-
-from route.views import showroute,showmap
+from route.views import showroute, home
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('showroute',showroute,name='showroute'),
-    path('',showmap,name='showmap'),
+    path('showroute', showroute, name='showroute'),
+    path('', home, name="home"),
     ]
-    

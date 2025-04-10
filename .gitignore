@@ -1,3 +1,19 @@
-env/*
+# Виртуальное окружение
+venv
+.venv/
+
+# База данных
 *.sqlite3
+
+# Файлы IDE
+.idea/
+.vscode/
+
+# Кэш
+__pycache__
+*.py[cod]
+*$py.class
+
+# Другое
 *.txt
+credentials.py
