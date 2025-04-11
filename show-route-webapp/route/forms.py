@@ -1,6 +1,8 @@
 from django import forms
-from .models import Attraction
 
-class SimpleForm(forms.Form):
-    start_point = forms.ModelChoiceField(queryset=Attraction.objects.all(), label="Начальная точка", required=True)
-    end_point = forms.ModelChoiceField(queryset=Attraction.objects.all(), label="Конечная точка", required=True)
+
+class IntForm(forms.Form):
+    start_point = forms.IntegerField(label="Начальная точка", required=True)
+    dynamic_filed_1 = forms.IntegerField(label="Промежуточная точка",
+                                         required=True)
+    end_point = forms.IntegerField(label="Конечная точка", required=True)

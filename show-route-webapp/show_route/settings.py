@@ -80,7 +80,7 @@ WSGI_APPLICATION = 'show_route.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres',
+        'NAME': DB_INFO['name'],
         'USER': DB_INFO['user'],
         'PASSWORD': DB_INFO['password'],
         'HOST': DB_INFO['host'],
