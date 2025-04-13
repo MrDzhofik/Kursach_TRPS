@@ -7,7 +7,7 @@
 </head>
 
 <body>
-	<a class="black" href="{% url 'home' %}"><button class="btn btn-warning">Назад</button></a> -->
+	<button onclick="window.history.back()" class="btn btn-warning">Назад</button>
 	{% if map %}
 
 	{{map | safe}}

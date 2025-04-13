@@ -8,7 +8,6 @@ from .map import create_map
 
 def get_route(points):
     url = "http://router.project-osrm.org/route/v1/driving/"
-    print(points)
     for i in points:
         long, lat = map(float, i)
         url += f"{lat},{long};"
