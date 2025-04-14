@@ -1,6 +1,7 @@
 import requests
 import polyline
 
+from typing import Any
 from .distance import nearest_neighbour
 from .models import Sight
 from .map import create_map
@@ -8,8 +9,8 @@ from .map import create_map
 
 def get_route(points):
     url = "http://router.project-osrm.org/route/v1/driving/"
-    for i in points:
-        long, lat = map(float, i)
+    for point in points:
+        long, lat = float(point[1]), float(point[2])
         url += f"{lat},{long};"
     url = url[:-1]
     r = requests.get(url, timeout=100)
@@ -26,32 +27,33 @@ def get_route(points):
     end_point = [point[-1]['location'][1], point[-1]['location'][0]]
     distance = res['routes'][0]['distance']
 
-    out = {'route': routes,
+    out = {
+           'route': routes,
            'start_point': start_point,
            'waypoints': waypoints,
            'end_point': end_point,
-           'distance': distance}
+           'distance': distance
+        }
 
-    return out
+    return points, out
 
 
-def makeroute(data):
+def makeroute(data: Any):
     points = []
     for key in data.keys():
         if key != 'csrfmiddlewaretoken':
             i = data.get(key)
-
             geo = Sight.objects.get(id=i)
             longitude = geo.longitude
             latitude = geo.latitude
-            points.append([longitude, latitude])
+            points.append([geo.name, longitude, latitude])
 
     # Если количество точек больше 4, то делаем оптимизацию
     # методом ближайшего соседа
     if len(points) >= 4:
         points = nearest_neighbour(points)
 
-    route = get_route(points)
+    points, route = get_route(points)
     figure = create_map(route)
 
-    return figure
+    return points, figure

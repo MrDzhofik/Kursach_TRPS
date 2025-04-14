@@ -15,6 +15,9 @@ def min_dist(row: list, indexes):
 
 # Расчет расстояния геогрaфических точек
 def calc_distance(points):
+    coord = []
+    for point in points:
+        coord.append((point[1], point[2]))
     distance = []
     dist = []
     for i in range(len(points)):
@@ -22,7 +25,7 @@ def calc_distance(points):
             if j == i:
                 dist.append(100000000)
             else:
-                dist.append(round(geodesic(points[i], points[j]).km, 2))
+                dist.append(round(geodesic(coord[i], coord[j]).km, 2))
         distance.append(dist)
         dist = []
 

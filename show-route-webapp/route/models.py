@@ -20,3 +20,6 @@ class Sight(models.Model):
     class Meta:
         db_table = 'sight'
         managed = False
+
+    def __str__(self):
+        return self.name
